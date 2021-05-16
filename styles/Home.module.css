@@ -1,20 +1,46 @@
 .page {
-  @apply container max-w-xl;
+  @apply container max-w-screen-sm;
   @apply flex flex-col;
+  @apply px-8;
 }
 
 .h1 {
   @apply text-center;
+  @apply text-4xl font-bold;
+  @apply mt-24;
 }
 
 .logo {
   @apply block mx-auto;
+  @apply mt-7;
 }
 
 .login {
-
+  @apply self-end;
+  @apply border-2 border-black rounded-xl;
+  @apply w-44;
+  @apply mt-7;
 }
 
 .start {
+  height: 60px;
+  background: #00A1E0;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25), -4px -4px 4px rgba(0, 0, 0, 0.25);
+  @apply mt-40;
+  @apply text-lg text-white font-medium;
+}
 
+.backR {
+  background: #830029;
+  width: 10vh;
+  height: 10vh;
+  z-index: -1;
+  @apply transform scale-x-150 translate-y-40 rotate-12;
+}
+
+.svg {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
