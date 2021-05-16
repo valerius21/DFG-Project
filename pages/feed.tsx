@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import Link from 'next/link'
 import ArrowBtn from '../components/ArrowButton'
-import styles from '../styles/Pick.module.css'
+import styles from '../styles/feed.module.css'
 
 const UID = 'USER_ID_XXX'
 

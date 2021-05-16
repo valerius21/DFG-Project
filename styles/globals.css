@@ -1,3 +1,4 @@
+@import '~antd/dist/antd.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 @tailwind base;
@@ -20,6 +21,7 @@ a {
 
 * {
   box-sizing: border-box;
+  /* overflow-x: hidden; */
 }
 
 .page {

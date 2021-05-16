@@ -1,6 +1,6 @@
 .done {
-    @apply text-4xl font-bold text-center;
-    @apply mt-24;
+    @apply transform -translate-y-24;
+    @apply text-4xl font-bold text-center text-white;
 }
 
 .logo {
@@ -15,5 +15,17 @@
 }
 
 .emoji {
-    @apply text-center text-4xl mt-10;
+    @apply text-center text-4xl mt-10 pb-40;
 }
+
+.item1 {
+    height: 50px;
+    background-color: #830029;
+}
+
+/* 
+.blob {
+    display: block;
+    position: absolute;
+    z-index: -1;
+} */

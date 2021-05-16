@@ -1,6 +1,7 @@
 .pictureCanvas {
     background: rgba(0, 115, 174, 0.7);
     border-radius: 10px;
+    @apply max-w-md mx-auto;
 }
 
 .picture {
