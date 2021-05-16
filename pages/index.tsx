@@ -11,8 +11,9 @@ const Start = () => {
   return (
     <>
       <div className={styles.page}>
-        <button className={styles.login}>Login as Admin</button>
-
+        <Link href='/login'>
+          <button className={styles.login}>Login as Admin</button>
+        </Link>
         <br />
         <h1 className={styles.h1}>{Config.title}</h1>
 

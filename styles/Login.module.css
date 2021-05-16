@@ -1,0 +1,26 @@
+.upperPage {
+    height: 50vh;
+    padding: 2rem;
+}
+
+.title {
+    @apply mt-11;
+    @apply text-4xl font-bold text-center;
+}
+
+.picture {
+    max-width: 320px;
+    @apply mx-auto;
+}
+
+.lowerPage {
+    height: 50vh;
+    /* background:  linear-gradient(0deg, #830029 17.51 #B92151 49.45%); */
+    background: rgb(131,0,41);
+    background: linear-gradient(180deg, rgba(131,0,41,1) 0%, rgba(185,33,81,1) 48%, rgba(185,33,81,1) 67%);
+    @apply mt-1 rounded-t-3xl;
+}
+
+.login {
+    @apply w-56 mx-auto py-10;
+}
