@@ -27,7 +27,7 @@ const Start = () => {
         </div>
 
         <br />
-        <Link href="/pick">
+        <Link href="/feed">
           <button className={styles.start}>Start</button>
         </Link>
 

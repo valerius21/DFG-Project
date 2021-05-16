@@ -1,0 +1,19 @@
+.done {
+    @apply text-4xl font-bold text-center;
+    @apply mt-24;
+}
+
+.logo {
+    @apply block mx-auto;
+    @apply mt-28;
+}
+
+.thanks {
+    @apply text-center text-4xl font-bold text-black;
+    @apply mt-11;
+    @apply w-52 mx-auto;
+}
+
+.emoji {
+    @apply text-center text-4xl mt-10;
+}
