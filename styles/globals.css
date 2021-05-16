@@ -21,3 +21,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.page {
+  @apply container max-w-screen-sm;
+  @apply flex flex-col;
+  @apply px-8;
+}
+

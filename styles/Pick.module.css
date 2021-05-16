@@ -1,0 +1,27 @@
+.uid {
+    @apply col-span-2 text-xl font-medium text-black text-right;
+}
+
+.tap {
+    padding-top: 20px;
+    @apply font-medium text-center text-xl text-white;
+}
+
+.rect {
+    height: 15vh;
+    width: 100%;
+    background-color: #B92151;
+    border-radius: 10px;
+    z-index: -1;
+    @apply col-span-3;
+}
+
+.feed {
+    /* transform: translateY(-200px) */
+    @apply col-span-3 transform -translate-y-36;
+}
+
+.pictureCard {
+    border-radius: 10px;
+    width: 100%;
+}
