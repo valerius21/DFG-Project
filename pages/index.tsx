@@ -15,7 +15,7 @@ const Start = () => {
           <button className={styles.login}>Login as Admin</button>
         </Link>
         <br />
-        <h1 className={styles.h1}>{Config.title}</h1>
+        <h1 className={styles.h1}>{Config.title.toUpperCase()}</h1>
 
         <br />
         <div className={styles.logo}>
