@@ -18,7 +18,7 @@ interface SliderInputInterface {
 }
 
 
-const SliderInput: FC<SliderInputInterface> = ({ targetGroup, className, inputType = 'checkbox' }) => {
+const Input: FC<SliderInputInterface> = ({ targetGroup, className, inputType = 'checkbox' }) => {
     const element = {
         ['radio']: <Radio >{targetGroup}</Radio>,
         ['checkbox']: <Checkbox>{targetGroup}</Checkbox>,
@@ -61,10 +61,10 @@ const PhotoEval = () => {
             </div>
             <div className="mt-3" />
             <div className="page border-2 rounded-md mx-5">
-                <SliderInput targetGroup="Friends" inputType="radio" />
-                <SliderInput targetGroup="Family" inputType="radio" />
-                <SliderInput targetGroup="Collegues" inputType="slider" />
-                <SliderInput targetGroup="Public" />
+                <Input targetGroup="Friends" inputType="radio" />
+                <Input targetGroup="Family" inputType="radio" />
+                <Input targetGroup="Collegues" inputType="slider" />
+                <Input targetGroup="Public" />
             </div>
         </div>
     )
