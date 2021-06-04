@@ -2,8 +2,9 @@ import React, { FC } from 'react'
 import Link from 'next/link'
 import ArrowBtn from '../components/ArrowButton'
 import styles from '../styles/feed.module.css'
+import { nanoid } from 'nanoid'
 
-const UID = 'USER_ID_XXX'
+const UID = `USER_ID_${nanoid()}`
 
 interface PictureInterface {
     src: string,

@@ -3,42 +3,11 @@ import Link from 'next/link'
 import { Slider, Checkbox, Radio } from 'antd'
 
 import { Picture } from './feed'
+import { tmpQuestionsConfig as tmpForm } from "../Config";
 import styles from '../styles/Eval.module.css'
 import CheckMarkBtn from '../components/CheckMarkBtn'
 import ArrowButton from '../components/ArrowButton'
 import yaml from 'js-yaml'
-
-const tmpForm = `# element group
-type: photo_evaluation
-
-# Photo ID to map the evaluation to
-id: '<study>:<username>'
-
-# Question to be displayed
-question: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
-
-# Site title
-label: 'Photo Evaluation'
-
-# sites in question
-pages:
-  -
-    type: 'page'
-    id: '<photo>:<username>'
-    label: '<question title>'
-    # Question to be displayed
-    question: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et'
-    answers:
-      -
-        answer: 'Family'
-        inputType: 'radioButton'
-      -
-        answer: 'Friends'
-        inputType: 'checkBox'
-      -
-        answer: 'Collegues'
-        inputType: 'slider'
-`
 
 type InputType = 'slider' | 'radio' | 'checkbox'
 
@@ -50,13 +19,15 @@ interface SliderInputInterface {
 
 
 const SliderInput: FC<SliderInputInterface> = ({ targetGroup, className, inputType = 'checkbox' }) => {
+    const element = {
+        ['radio']: <Radio >{targetGroup}</Radio>,
+        ['checkbox']: <Checkbox>{targetGroup}</Checkbox>,
+        ['slider']: <div><p className="text-center text-base">{targetGroup}</p><Slider /></div>
+    }
 
     return (
-        <div className="py-3" style={{ margin: 'auto' }}>
-            {inputType === 'slider' && (<><p className="text-center text-base">{targetGroup}</p><Slider /></>)}
-            {inputType !== 'slider' && <div>
-                {inputType === 'checkbox' ? <Checkbox>{targetGroup}</Checkbox> : <Radio >{targetGroup}</Radio>}
-            </div>}
+        <div className="py-3">
+            {element[inputType]}
         </div>
     )
 }
@@ -89,10 +60,10 @@ const PhotoEval = () => {
                 </div>
             </div>
             <div className="mt-3" />
-            <div className="page">
-                <SliderInput targetGroup="Friends" />
-                <SliderInput targetGroup="Family" />
-                <SliderInput targetGroup="Collegues" />
+            <div className="page border-2 rounded-md mx-5">
+                <SliderInput targetGroup="Friends" inputType="radio" />
+                <SliderInput targetGroup="Family" inputType="radio" />
+                <SliderInput targetGroup="Collegues" inputType="slider" />
                 <SliderInput targetGroup="Public" />
             </div>
         </div>
