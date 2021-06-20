@@ -1,71 +1,58 @@
 import React from 'react'
 import ImageForm from '../components/ImageForm'
 import { useRouter } from 'next/router'
-import { ApolloError, gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import client from '../utils/apollo-client'
-
-const QUERY = gql`
-query CountFlickrPublic {
-  flickr_public_aggregate {
-    aggregate {
-      count
-    }
-  }
-}`
 
 const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	// UID
 	const router = useRouter()
 	const { user } = router.query
 
-	// BACKEND DATA
-	// const { data, loading, error } = useQuery(QUERY)
+	const { imgURL, isPrivate, publicSubmissions, id } = data
 
-	// if (error) {
-	// console.error(error)
-	// return null
-	// }
-
-	// if (loading) {
-	// return <h2>Loading...</h2>
-	// }
-
-	// const { count } = data.flickr_public_aggregate.aggregate
-	// if (!count) {
-	// console.error("no count fetched")
-	// 	return null
-	// }
-	// const nextID = Math.floor(Math.random() * count)
 
 	return (
 		<div>
 			<p>User ID: {user}</p>
 			<p>Save your ID to continue later</p>
-			{/* {loading ? <h2>Loading...</h2> : <pre>{JSON.stringify(count, null, 2)}</pre>} */}
 
-			{/* <pre>{JSON.stringify({ nextID }, null, 2)}</pre> */}
 			<pre>{JSON.stringify(data, null, 2)}</pre>
 
+			<img src={imgURL} alt="Image not available. Please refresh the page." />
+
 			<ImageForm />
+			<button onClick={() => router.reload()}>Next Image</button>
 		</div>
 	)
 }
 
-interface UserImageData {
-	privateImageURL: string,
-	publicImageURL: string,
-	publicSubmissions: number,
-}
-
 const getPublicImage = async (id: number): Promise<string> => {
-	console.log('request public img', id)
-	throw "Unimplemented!"
+	const { data } = await client.query({
+		query: gql`query GetUnsplashImage {
+			unsplash_photos(where: {id: {_eq: ${id}}}) {
+				photo_id
+				id
+				photo_image_url
+			}
+		}
+	`
+	})
+	return data.unsplash_photos[0].photo_image_url
 }
 
 const getPrivateImage = async (id: number): Promise<string> => {
-	console.log('request private img', id)
-	throw "Unimplemented!"
+	const { data } = await client.query({
+		query: gql`query GetPrivateFlickrImage {
+			flickr_private(where: {id: {_eq: ${id}}}) {
+				destination
+				id
+			}
+		}
+	`
+	})
+	return data.flickr_private[0].destination
 }
 
 const getCount = async (db: 'unsplash' | 'flickr'): Promise<number> => {
@@ -109,22 +96,28 @@ const getCount = async (db: 'unsplash' | 'flickr'): Promise<number> => {
 export const getServerSideProps: GetServerSideProps = async () => {
 	const tmpPublicUserSubmissions: number = 150 // TODO: count user submission type in database
 
-	let privatePic: boolean = Math.random() <= 0.5
-	if (tmpPublicUserSubmissions >= 200) privatePic = true
+	let isPrivate: boolean = Math.random() <= 0.5
+	if (tmpPublicUserSubmissions >= 200) isPrivate = true
 
 	let imgURL: string
+	let id: number;
 
-	if (privatePic) {
-		const id = Math.floor(Math.random() * (await getCount('flickr')))
+	if (isPrivate) {
+		id = Math.floor(Math.random() * (await getCount('flickr')))
 		imgURL = await getPrivateImage(id)
 	} else {
-		const id = Math.floor(Math.random() * (await getCount('unsplash')))
+		id = Math.floor(Math.random() * (await getCount('unsplash')))
 		imgURL = await getPublicImage(id)
 	}
 
 	return {
 		props: {
-			data: imgURL
+			data: {
+				imgURL,
+				isPrivate,
+				publicSubmissions: -1,
+				id,
+			}
 		}
 	}
 }
