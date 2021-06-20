@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
+import NextImage from 'next/image'
 
 interface PhotoInterface {
 	imgURL: string
@@ -21,7 +22,9 @@ const Photo: FC<PhotoInterface> = ({ imgURL }) => {
 	}, [])
 	return (
 		<div>
-			{imageExists ? <img src={imgURL} alt="Please refresh the page" /> : <button onClick={() => router.reload()}>Image not found. Reload Image</button>}
+
+			{imageExists ? <NextImage alt="Please refresh the page" src={imgURL} placeholder="blur" height={500} width={500} />
+				: <button onClick={() => router.reload()}>Image not found. Reload Image</button>}
 
 		</div>
 	)

@@ -20,8 +20,7 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
 			<pre>{JSON.stringify(data, null, 2)}</pre>
 
-			<ImageForm imgURL={imgURL} />
-			<button onClick={() => router.reload()}>Next Image</button>
+			<ImageForm imgURL={imgURL} isPrivate={isPrivate} publicSubmissions={publicSubmissions} imageID={id} />
 		</div>
 	)
 }
