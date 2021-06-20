@@ -20,9 +20,7 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
 			<pre>{JSON.stringify(data, null, 2)}</pre>
 
-			<img src={imgURL} alt="Image not available. Please refresh the page." />
-
-			<ImageForm />
+			<ImageForm imgURL={imgURL} />
 			<button onClick={() => router.reload()}>Next Image</button>
 		</div>
 	)

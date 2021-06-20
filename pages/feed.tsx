@@ -4,7 +4,7 @@ import ArrowBtn from '../components/ArrowButton'
 import styles from '../styles/feed.module.css'
 import { nanoid } from 'nanoid'
 
-const UID = `USER_ID_${nanoid()}`
+const UID = `USER_ID_${nanoid(5)}`
 
 interface PictureInterface {
     src: string,

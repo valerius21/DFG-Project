@@ -1,36 +1,13 @@
-import React from 'react'
-import { Formik } from 'formik';
+import React, { FC } from 'react'
+import Photo from "./Photo";
 
-const ImageForm = () => {
+interface ImageFormInterface {
+	imgURL: string,
+}
+const ImageForm: FC<ImageFormInterface> = ({ imgURL }) => {
 	return (
 		<div>
-			<h1>Anywhere in your app!</h1>
-			<Formik
-				initialValues={{}}
-				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
-				}}
-			>
-				{({
-					values,
-					errors,
-					touched,
-					handleChange,
-					handleBlur,
-					handleSubmit,
-					isSubmitting,
-					/* and other goodies */
-				}) => (
-					<form onSubmit={handleSubmit}>
-						<button type="submit" disabled={isSubmitting}>
-							Submit
-						</button>
-					</form>
-				)}
-			</Formik>
+			<Photo imgURL={imgURL} />
 		</div>
 	)
 }
