@@ -46,7 +46,6 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 						return
 					}
 
-					console.log(answers);
 					setIsSubmitting(true)
 
 
