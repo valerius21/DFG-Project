@@ -37,4 +37,3 @@ a {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25), -4px -4px 4px rgba(0, 0, 0, 0.25);
   @apply text-lg text-white font-medium w-20;
 }
-
