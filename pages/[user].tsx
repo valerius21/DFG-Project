@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { gql } from '@apollo/client'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import client from '../utils/apollo-client'
+import UserSubmissions from '../components/UserSubmissions'
 
 const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	// UID
@@ -17,8 +18,7 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 		<div>
 			<p>User ID: {user}</p>
 			<p>Save your ID to continue later</p>
-
-			<pre>{JSON.stringify(data, null, 2)}</pre>
+			<div>Submission Count: <UserSubmissions uid={user} /></div>
 
 			<ImageForm imgURL={imgURL} isPrivate={isPrivate} publicSubmissions={publicSubmissions} imageID={id} />
 		</div>
