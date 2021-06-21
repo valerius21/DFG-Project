@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Formik, Form, Field } from "formik";
+import { Checkbox, Radio, SubmitButton } from 'formik-antd'
 import { useRouter } from "next/router";
 
 import Photo from "./Photo";
@@ -44,6 +45,9 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 						return
 					}
 
+					console.log(answers);
+
+
 					const checkboxes = `{${answers.questionTwo.reduce((accumulator, currentValue) => `${accumulator},${currentValue}`)}}`
 
 					insertAnswer({
@@ -62,30 +66,29 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 			>
 				{({ values: answers }) => (
 					<Form>
-						<div id="question-one">
+						<div id="questionOne">
 							Wie würden Sie die Empfindlichkeit des Bildes bewerten?
 						</div>
-						<div role="group" aria-labelledby="question-one">
+						<Radio.Group name="questionOne" >
 							{questionOneOptions.map(q => <div key={q}>
-								<label>
-									<Field type="radio" name="questionOne" value={q} />
-									{q}
-								</label>
+								<Radio name="questionOne" value={q} >
+									{/* <Field type="radio" name="questionOne" value={q} /> */}
+									{q}</Radio>
 
 							</div>)}
-						</div>
-						<div id="question-two">
+						</Radio.Group>
+						<div id="questionTwo" className="mt-5">
 							Mit wem würden Sie dieses Foto teilen?
 						</div>
-						<div role="group" aria-labelledby="question-two">
+						<Checkbox.Group name="questionTwo">
 							{questionTwoOptions.map(q => <div key={q}>
-								<label>
-									<Field type="checkbox" name="questionTwo" value={q} />
-									{q}
-								</label>
+								<Checkbox name="questionTwo" value={q} >
+									{q}</Checkbox>
 							</div>)}
-						</div>
-						<button className="primaryBtn" type="submit">Weiter</button>
+						</Checkbox.Group>
+						{/* <button className="primaryBtn" type="submit">Weiter</button> */}
+						<br />
+						<SubmitButton className="mt-5" disabled={false} >Weiter</SubmitButton>
 					</Form>
 				)}
 			</Formik>

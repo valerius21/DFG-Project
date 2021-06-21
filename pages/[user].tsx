@@ -15,12 +15,13 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
 
 	return (
-		<div>
-			<p>User ID: {user}</p>
-			<p>Save your ID to continue later</p>
-			<div>Submission Count: <UserSubmissions uid={user} /></div>
-
-			<ImageForm imgURL={imgURL} isPrivate={isPrivate} imageID={id} />
+		<div className="container max-w-5xl">
+			<div className="grid grid-cols-1 gap-5 items-center justify-items-center">
+				<p>User ID: {user}</p>
+				<p>Save your ID to continue later</p>
+				<div>Submission Count: <UserSubmissions uid={user} /></div>
+				<ImageForm imgURL={imgURL} isPrivate={isPrivate} imageID={id} />
+			</div>
 		</div>
 	)
 }

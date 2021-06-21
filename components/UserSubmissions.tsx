@@ -6,7 +6,7 @@ interface UserSubmissionsInterface {
 	uid: string | string[]
 }
 
-const USER_SUBMISSION_QUERY = gql`
+export const USER_SUBMISSION_QUERY = gql`
 query UserSubmissionCount($_eq: String!) {
   results_aggregate(where: {user: {_eq: $_eq}}) {
     aggregate {
