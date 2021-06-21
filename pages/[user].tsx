@@ -24,8 +24,8 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
 
 	return (
-		<div className="container max-w-5xl">
-			<div className="grid grid-cols-1 p-5 gap-5 items-center justify-items-center">
+		<div className="container-xl mx-auto px-5">
+			<div className="grid grid-cols-1 gap-5 items-center justify-items-center">
 				<div className="mt-10">User ID: <strong>{user}</strong></div>
 				<CopyToClipboard text={user} onCopy={copyNotification}>
 					<Button type="primary" shape="round" size="middle">
