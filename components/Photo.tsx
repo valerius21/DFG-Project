@@ -20,7 +20,7 @@ const Photo: FC<PhotoInterface> = ({ imgURL }) => {
 	const [loading, setLoading] = useState<boolean>(true)
 
 	useEffect(() => {
-		checkImage(imgURL, () => { setImageExists(true); setLoading(false) }, () => { setImageExists(false); setLoading(false) })
+		checkImage(imgURL, () => { setImageExists(true); setTimeout(() => setLoading(false), 2000) }, () => { setImageExists(false); setLoading(false) })
 	}, [])
 
 	if (loading) return (

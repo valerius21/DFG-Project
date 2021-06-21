@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, useSubscription } from '@apollo/client'
 import router from 'next/router'
 import React, { FC } from 'react'
 import { Progress } from "antd";
@@ -19,7 +19,7 @@ query UserSubmissionCount($_eq: String!) {
 
 // Number of sumbissions made by the user
 const UserSubmissions: FC<UserSubmissionsInterface> = ({ uid }) => {
-	const { loading, error, data } = useQuery(USER_SUBMISSION_QUERY, { variables: { _eq: uid } })
+	const { loading, error, data } = useSubscription(USER_SUBMISSION_QUERY, { variables: { _eq: uid }, fetchPolicy: 'no-cache' })
 
 	if (loading) return <div>Loading...</div>
 
