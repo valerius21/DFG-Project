@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import NextImage from 'next/image'
-import { Skeleton } from "antd"
+import { Skeleton, Space, Image as AImage } from "antd"
 
 interface PhotoInterface {
 	imgURL: string
@@ -27,8 +27,18 @@ const Photo: FC<PhotoInterface> = ({ imgURL }) => {
 		<Skeleton.Button className="mb-10" style={{ width: 500, height: 500 }} active={true} />
 	)
 	return (
-		<div className="mb-10">
-			{imageExists ? <NextImage className="mx-auto block" alt="Please refresh the page" src={imgURL} placeholder="blur" height={500} width={500} />
+		<div className="mb-10 flex">
+			{imageExists ? (
+				<Space size={12} >
+					<AImage
+						className="self-auto"
+						alt="Please refresh the page"
+						src={imgURL}
+						height={500}
+						placeholder={<AImage preview={false} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200" height={500}
+						/>} />
+				</Space>
+			)
 				: <button onClick={() => router.reload()}>Image not found. Reload Image</button>}
 		</div>
 	)
