@@ -1,7 +1,7 @@
 image: node:latest
 
 before_script:
-  - npm install
+  - yarn install
 
 cache:
   paths:
