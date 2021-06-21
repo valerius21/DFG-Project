@@ -11,7 +11,7 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 	const router = useRouter()
 	const { user } = router.query
 
-	const { imgURL, isPrivate, publicSubmissions, id } = data
+	const { imgURL, isPrivate, id } = data
 
 
 	return (
@@ -20,7 +20,7 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 			<p>Save your ID to continue later</p>
 			<div>Submission Count: <UserSubmissions uid={user} /></div>
 
-			<ImageForm imgURL={imgURL} isPrivate={isPrivate} publicSubmissions={publicSubmissions} imageID={id} />
+			<ImageForm imgURL={imgURL} isPrivate={isPrivate} imageID={id} />
 		</div>
 	)
 }

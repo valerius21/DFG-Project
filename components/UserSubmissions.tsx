@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
+import router from 'next/router'
 import React, { FC } from 'react'
 
 interface UserSubmissionsInterface {
@@ -24,6 +25,7 @@ const UserSubmissions: FC<UserSubmissionsInterface> = ({ uid }) => {
 	if (error) return <div>Loading error!</div>
 
 	const { count } = data.results_aggregate.aggregate
+	if (count === 300) router.push('/done')
 	return (
 		<>
 			{count} / 300

@@ -11,7 +11,6 @@ interface ImageFormInterface {
 	imgURL: string,
 	imageID: string,
 	isPrivate: boolean,
-	publicSubmissions?: number
 }
 
 const INSERT_ANSWER = gql`mutation InsertAnswer($object: results_insert_input!) {
@@ -21,10 +20,10 @@ const INSERT_ANSWER = gql`mutation InsertAnswer($object: results_insert_input!) 
 }
 `
 
-const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID, publicSubmissions }) => {
+const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 	const router = useRouter()
 	const { user } = router.query
-	const [insertAnswer, { data }] = useMutation(INSERT_ANSWER)
+	const [insertAnswer] = useMutation(INSERT_ANSWER)
 	const questionOneOptions = ['sehr privat', 'privat', 'unentscheidbar', 'nicht privat']
 	const questionTwoOptions = ['Freunden', 'Bekannten', 'Kollegen', 'Familie']
 	return (
@@ -44,7 +43,9 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID, publicS
 						alert('Some information is missing!')
 						return
 					}
+
 					const checkboxes = `{${answers.questionTwo.reduce((accumulator, currentValue) => `${accumulator},${currentValue}`)}}`
+
 					insertAnswer({
 						variables: {
 							object: {
