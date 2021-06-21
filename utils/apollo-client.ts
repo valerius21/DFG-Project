@@ -7,7 +7,6 @@ const client = new ApolloClient({
 		'x-hasura-admin-secret': '4reLXSnkhSfHKifO6c64mn0k1TMVGXs7KaQDVkpKQyuYcn9A5xtp1lIhCzEQrWgG'
 	},
 	cache: new InMemoryCache(),
-	connectToDevTools: true
 })
 
 export default client

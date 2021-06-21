@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Formik, Form, Field } from "formik";
 import { Checkbox, Radio, SubmitButton } from 'formik-antd'
 import { useRouter } from "next/router";
@@ -25,6 +25,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 	const router = useRouter()
 	const { user } = router.query
 	const [insertAnswer] = useMutation(INSERT_ANSWER)
+	const [isSubmitting, setIsSubmitting] = useState(false)
 	const questionOneOptions = ['sehr privat', 'privat', 'unentscheidbar', 'nicht privat']
 	const questionTwoOptions = ['Freunden', 'Bekannten', 'Kollegen', 'Familie']
 	return (
@@ -35,7 +36,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 					questionOne: '',
 					questionTwo: []
 				}}
-				onSubmit={async (answers) => {
+				onSubmit={async (answers, actions) => {
 					if (Array.isArray(user)) {
 						alert('User unknown! Please login again.')
 						return
@@ -46,6 +47,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 					}
 
 					console.log(answers);
+					setIsSubmitting(true)
 
 
 					const checkboxes = `{${answers.questionTwo.reduce((accumulator, currentValue) => `${accumulator},${currentValue}`)}}`
@@ -61,7 +63,11 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 								user
 							}
 						}
-					}).then(() => router.reload()).catch(() => alert('Database connection error!'))
+					}).then(async () => {
+						await router.push(`/${user}`)
+						setIsSubmitting(false)
+						actions.resetForm()
+					}).catch(() => alert('Database connection error!'))
 				}}
 			>
 				{({ values: answers }) => (
@@ -88,7 +94,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 						</Checkbox.Group>
 						{/* <button className="primaryBtn" type="submit">Weiter</button> */}
 						<br />
-						<SubmitButton className="mt-5" disabled={false} >Weiter</SubmitButton>
+						<SubmitButton className="mt-5" loading={isSubmitting}>Weiter</SubmitButton>
 					</Form>
 				)}
 			</Formik>

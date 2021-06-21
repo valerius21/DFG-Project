@@ -5,6 +5,15 @@ import { gql } from '@apollo/client'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import client from '../utils/apollo-client'
 import UserSubmissions from '../components/UserSubmissions'
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Button, notification } from "antd";
+
+const copyNotification = (uid: string) => {
+	notification.open({
+		message: 'Zwischenablage',
+		description: `User ID ${uid} wurde kopiert!`
+	})
+}
 
 const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	// UID
@@ -17,9 +26,14 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 	return (
 		<div className="container max-w-5xl">
 			<div className="grid grid-cols-1 gap-5 items-center justify-items-center">
-				<p>User ID: {user}</p>
-				<p>Save your ID to continue later</p>
-				<div>Submission Count: <UserSubmissions uid={user} /></div>
+				<div className="mt-10">User ID: <strong>{user}</strong></div>
+				<CopyToClipboard text={user} onCopy={copyNotification}>
+					<Button type="primary" shape="round" size="middle">
+						In die Zwischenablage
+					</Button>
+				</CopyToClipboard>
+				<div>Mit der ID können Sie zu einem späteren Zeitpunkt die Studie fortsetzen.</div>
+				<UserSubmissions uid={user} />
 				<ImageForm imgURL={imgURL} isPrivate={isPrivate} imageID={id} />
 			</div>
 		</div>

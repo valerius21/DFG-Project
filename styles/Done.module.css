@@ -6,11 +6,12 @@
 .logo {
     @apply block mx-auto;
     @apply mt-28;
+    max-width: 50%
 }
 
 .thanks {
     @apply text-center text-4xl font-bold text-black;
-    @apply mt-11;
+    @apply mt-5;
     @apply w-52 mx-auto;
 }
 

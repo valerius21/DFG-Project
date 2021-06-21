@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import router from 'next/router'
 import React, { FC } from 'react'
+import { Progress } from "antd";
 
 interface UserSubmissionsInterface {
 	uid: string | string[]
@@ -27,9 +28,17 @@ const UserSubmissions: FC<UserSubmissionsInterface> = ({ uid }) => {
 	const { count } = data.results_aggregate.aggregate
 	if (count === 300) router.push('/done')
 	return (
-		<>
-			{count} / 300
-		</>
+		<div style={{ width: '50%' }}>
+			<div className="text-center">Fortschritt</div>
+			<Progress
+				strokeColor={{
+					from: '#830029',
+					to: '#B92151'
+				}}
+				percent={Math.ceil(count / 300)}
+				status="active"
+			/>
+		</div>
 	)
 }
 

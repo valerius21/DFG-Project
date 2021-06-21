@@ -9,15 +9,17 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.20",
-    "antd": "^4.15.5",
+    "antd": "^4.16.3",
     "axios": "^0.21.1",
     "axios-hooks": "^2.6.3",
     "formik": "^2.2.9",
     "formik-antd": "^2.0.1",
+    "framer-motion": "^4.1.17",
     "graphql": "^15.5.0",
     "js-yaml": "^4.1.0",
     "next": "10.2.0",
     "react": "17.0.2",
+    "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "17.0.2"
   },
   "devDependencies": {

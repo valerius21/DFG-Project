@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import NextImage from 'next/image'
+import { Skeleton } from "antd"
 
 interface PhotoInterface {
 	imgURL: string
@@ -21,7 +22,10 @@ const Photo: FC<PhotoInterface> = ({ imgURL }) => {
 	useEffect(() => {
 		checkImage(imgURL, () => { setImageExists(true); setLoading(false) }, () => { setImageExists(false); setLoading(false) })
 	}, [])
-	if (loading) return <>Loading image...</>
+
+	if (loading) return (
+		<Skeleton.Button className="mb-10" style={{ width: 500, height: 500 }} active={true} />
+	)
 	return (
 		<div className="mb-10">
 			{imageExists ? <NextImage className="mx-auto block" alt="Please refresh the page" src={imgURL} placeholder="blur" height={500} width={500} />
