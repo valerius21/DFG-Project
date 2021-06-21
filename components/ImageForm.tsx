@@ -32,7 +32,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 	const questionOneOptions = ['sehr privat', 'privat', 'nicht privat', 'unentscheidbar']
 	const questionTwoOptions = ['Freunden', 'Bekannten', 'Kollegen', 'Familie', 'mit Niemanden']
 	return (
-		<div>
+		<div className="px-5 mb-10">
 			<Photo imgURL={imgURL} />
 			<Formik
 				initialValues={{
