@@ -5,18 +5,28 @@ import { useRouter } from "next/router";
 import Photo from "./Photo";
 
 import "antd/dist/antd.css"
+import { gql, useMutation } from '@apollo/client';
 
 interface ImageFormInterface {
 	imgURL: string,
 	imageID: string,
 	isPrivate: boolean,
-	publicSubmissions: number
+	publicSubmissions?: number
 }
-const ImageForm: FC<ImageFormInterface> = ({ imgURL }) => {
+
+const INSERT_ANSWER = gql`mutation InsertAnswer($object: results_insert_input!) {
+  insert_results_one(object: $object) {
+    id
+  }
+}
+`
+
+const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID, publicSubmissions }) => {
 	const router = useRouter()
+	const { user } = router.query
+	const [insertAnswer, { data }] = useMutation(INSERT_ANSWER)
 	const questionOneOptions = ['sehr privat', 'privat', 'unentscheidbar', 'nicht privat']
 	const questionTwoOptions = ['Freunden', 'Bekannten', 'Kollegen', 'Familie']
-	// TODO: Form validation
 	return (
 		<div>
 			<Photo imgURL={imgURL} />
@@ -25,13 +35,31 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL }) => {
 					questionOne: '',
 					questionTwo: []
 				}}
-				onSubmit={async (values) => {
-					console.log(values)
-					// TODO: after successful submission && not done
-					router.reload()
+				onSubmit={async (answers) => {
+					if (Array.isArray(user)) {
+						alert('User unknown! Please login again.')
+						return
+					}
+					if (answers.questionOne === '' || answers.questionTwo.length === 0) {
+						alert('Some information is missing!')
+						return
+					}
+					const checkboxes = `{${answers.questionTwo.reduce((accumulator, currentValue) => `${accumulator},${currentValue}`)}}`
+					insertAnswer({
+						variables: {
+							object: {
+								answers_questionOne: answers.questionOne,
+								answers_questionTwo: checkboxes,
+								photo_imageID: imageID,
+								photo_imgURL: imgURL,
+								photo_isPrivate: isPrivate,
+								user
+							}
+						}
+					}).then(() => router.reload()).catch(() => alert('Database connection error!'))
 				}}
 			>
-				{({ values }) => (
+				{({ values: answers }) => (
 					<Form>
 						<div id="question-one">
 							Wie würden Sie die Empfindlichkeit des Bildes bewerten?
@@ -56,7 +84,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL }) => {
 								</label>
 							</div>)}
 						</div>
-						<button type="submit">Next Image</button>
+						<button className="primaryBtn" type="submit">Weiter</button>
 					</Form>
 				)}
 			</Formik>
