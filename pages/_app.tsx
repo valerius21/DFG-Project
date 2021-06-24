@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps, router }) {
           opacity: 1
         }
       }}>
-        <div style={{ background: '#f0f2f5' }}>
+        <div style={{ background: '#f0f2f5', height: '100vh' }}>
           <Layout>
             <Component {...pageProps} />
           </Layout>

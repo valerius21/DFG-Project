@@ -29,7 +29,6 @@ const UserSubmissions: FC<UserSubmissionsInterface> = ({ uid }) => {
 	}
 	const { count } = data.results_aggregate.aggregate
 
-	console.log(Math.ceil(count / 300), count);
 
 	if (count === 300) router.push('/done')
 
