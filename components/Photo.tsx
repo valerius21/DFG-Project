@@ -28,7 +28,7 @@ const Photo: FC<PhotoInterface> = ({ imgURL }) => {
 	)
 	return (
 		<div className="mb-10">
-			{imageExists ? <NextImage className="mx-auto block" alt="Please refresh the page" src={imgURL} placeholder="blur" height={500} width={500} />
+			{imageExists ? <NextImage className="mx-auto block" alt="Please refresh the page" src={imgURL} height={500} width={500} />
 				: <button onClick={() => router.reload()}>Image not found. Reload Image</button>}
 		</div>
 	)
