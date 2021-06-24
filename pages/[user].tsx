@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import ImageForm from '../components/ImageForm'
 import { useRouter } from 'next/router'
 import { gql } from '@apollo/client'
@@ -6,7 +6,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import client from '../utils/apollo-client'
 import UserSubmissions from '../components/UserSubmissions'
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Button, notification } from "antd";
+import { Button, notification, Layout, Typography, Tooltip } from "antd";
 
 const copyNotification = (uid: string) => {
 	notification.open({
@@ -16,6 +16,7 @@ const copyNotification = (uid: string) => {
 }
 
 const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+	const { Text } = Typography
 	// UID
 	const router = useRouter()
 	const { user } = router.query
@@ -24,18 +25,17 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
 
 	return (
-		<div className="container-xl mx-auto px-5">
-			<div className="grid grid-cols-1 gap-5 items-center justify-items-center">
-				<div className="mt-10">User ID: <strong>{user}</strong></div>
-				<CopyToClipboard text={user} onCopy={copyNotification}>
-					<Button type="primary" shape="round" size="middle">
-						In die Zwischenablage
-					</Button>
-				</CopyToClipboard>
-				<div>Mit der ID können Sie zu einem späteren Zeitpunkt die Studie fortsetzen.</div>
-				<UserSubmissions uid={user} />
-				<ImageForm imgURL={imgURL} isPrivate={isPrivate} imageID={id} />
-			</div>
+		<div className="grid grid-cols-1 gap-5 items-center justify-items-center">
+			<Tooltip title="Mit der ID können Sie zu einem späteren Zeitpunkt die Studie fortsetzen.">
+				<Text className="mt-10">User ID: <Text strong code>{user}</Text></Text>
+			</Tooltip>
+			<CopyToClipboard text={user} onCopy={copyNotification}>
+				<Button type="primary" shape="round" size="middle">
+					In die Zwischenablage
+				</Button>
+			</CopyToClipboard>
+			<UserSubmissions uid={user} />
+			<ImageForm imgURL={imgURL} isPrivate={isPrivate} imageID={id} />
 		</div>
 	)
 }
@@ -134,4 +134,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	}
 }
 
-export default Classifier
+export const User: FC = props => {
+	const { Header, Content, Footer } = Layout
+	return (
+		<>
+			<Header></Header>
+			<Content className="mx-auto" style={{ padding: 24, minHeight: 380, maxWidth: '80%', background: 'white' }}>
+				<Classifier {...props} />
+			</Content>
+			<Footer style={{ textAlign: 'center', height: '100%' }}>Written by Valerius Mattfeld, {(new Date().getFullYear())}.</Footer>
+		</>
+	)
+}
+export default User

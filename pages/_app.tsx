@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import { ApolloProvider } from '@apollo/client'
 import client from '../utils/apollo-client'
 import { motion } from 'framer-motion'
+import { Layout } from "antd";
 
 function MyApp({ Component, pageProps, router }) {
   return (
@@ -14,7 +15,11 @@ function MyApp({ Component, pageProps, router }) {
           opacity: 1
         }
       }}>
-        <Component {...pageProps} />
+        <div style={{ background: '#f0f2f5' }}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </div>
       </motion.div>
     </ApolloProvider>
   )
