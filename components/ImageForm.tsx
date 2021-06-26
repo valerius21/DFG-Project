@@ -42,22 +42,22 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 		{
 			value: 'sehr privat',
 			de: 'sehr privat',
-			en: 'TODO',
+			en: 'very private',
 		},
 		{
 			value: 'privat',
 			de: 'privat',
-			en: 'TODO',
+			en: 'private',
 		},
 		{
 			value: 'nicht privat',
 			de: 'nicht privat',
-			en: 'TODO',
+			en: 'not private',
 		},
 		{
 			value: 'unentscheidbar',
 			de: 'unentscheidbar',
-			en: 'TODO',
+			en: 'not possible',
 		}
 	]
 
