@@ -25,14 +25,50 @@ const INSERT_ANSWER = gql`mutation InsertAnswer($object: results_insert_input!) 
 }
 `
 
+interface Answer {
+	value: string,
+	en: string,
+	de: string
+}
+
 const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 	const router = useRouter()
 	const { user } = router.query
-	const { t } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const [insertAnswer] = useMutation(INSERT_ANSWER)
 	const [isSubmitting, setIsSubmitting] = useState(false)
-	const questionOneOptions = ['sehr privat', 'privat', 'nicht privat', 'unentscheidbar']
-	const questionTwoOptions = ['Freunden', 'Bekannten', 'Kollegen', 'Familie', 'mit Niemanden']
+
+	const questionOneOptions: Answer[] = [
+		{
+			value: 'sehr privat',
+			de: 'sehr privat',
+			en: 'TODO',
+		},
+		{
+			value: 'privat',
+			de: 'privat',
+			en: 'TODO',
+		},
+		{
+			value: 'nicht privat',
+			de: 'nicht privat',
+			en: 'TODO',
+		},
+		{
+			value: 'unentscheidbar',
+			de: 'unentscheidbar',
+			en: 'TODO',
+		}
+	]
+
+	const questionTwoOptions = [
+		'Freunden',
+		'Bekannten',
+		'Kollegen',
+		'Familie',
+		'mit Niemanden'
+	]
+
 	return (
 		<Row>
 			<Col span={20} offset={2}>
@@ -83,11 +119,12 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 								{t('questionOne')}
 							</Title>
 							<Radio.Group name="questionOne" >
-								{questionOneOptions.map(q => <div key={q}>
-									<Radio name="questionOne" value={q} >
-										{q}</Radio>
-
-								</div>)}
+								{questionOneOptions.map((q, i) =>
+									<div key={i}>
+										<Radio name="questionOne" value={q.value} >
+											{i18n.language === 'de' ? q.de : q.en}</Radio>
+									</div>
+								)}
 							</Radio.Group>
 							<Title level={5} id="questionTwo" className="mt-5">
 								{t('questionTwo')}
