@@ -3,6 +3,7 @@ import { ApolloProvider } from '@apollo/client'
 import client from '../utils/apollo-client'
 import { motion } from 'framer-motion'
 import { Layout } from "antd";
+import '../i18n/i18n'
 
 function MyApp({ Component, pageProps, router }) {
   return (

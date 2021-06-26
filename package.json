@@ -16,11 +16,13 @@
     "formik-antd": "^2.0.1",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.0",
+    "i18next": "^20.3.2",
     "js-yaml": "^4.1.0",
     "next": "^11.0.1",
     "react": "17.0.2",
     "react-copy-to-clipboard": "^5.0.3",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-i18next": "^11.11.0"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
