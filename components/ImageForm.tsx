@@ -61,12 +61,32 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 		}
 	]
 
-	const questionTwoOptions = [
-		'Freunden',
-		'Bekannten',
-		'Kollegen',
-		'Familie',
-		'mit Niemanden'
+	const questionTwoOptions: Answer[] = [
+		{
+			value: 'Freunden',
+			de: 'Freunden',
+			en: 'Friends',
+		},
+		{
+			value: 'Bekannten',
+			de: 'Bekannten',
+			en: 'Aquantance',
+		},
+		{
+			value: 'Kollegen',
+			de: 'Kollegen',
+			en: 'Collegues',
+		},
+		{
+			value: 'Familie',
+			de: 'Familie',
+			en: 'Family',
+		},
+		{
+			value: 'mit Niemanden',
+			de: 'mit Niemanden',
+			en: 'Nobody'
+		}
 	]
 
 	return (
@@ -130,9 +150,9 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 								{t('questionTwo')}
 							</Title>
 							<Checkbox.Group name="questionTwo">
-								{questionTwoOptions.map(q => <div key={q}>
-									<Checkbox name="questionTwo" value={q} >
-										{q}</Checkbox>
+								{questionTwoOptions.map(q => <div key={q.value}>
+									<Checkbox name="questionTwo" value={q.value} >
+										{i18n.language === 'de' ? q.de : q.en}</Checkbox>
 								</div>)}
 							</Checkbox.Group>
 							<br />
