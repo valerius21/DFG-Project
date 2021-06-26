@@ -7,11 +7,12 @@ import client from '../utils/apollo-client'
 import UserSubmissions from '../components/UserSubmissions'
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Button, notification, Layout, Typography, Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
 
-const copyNotification = (uid: string) => {
+const copyNotification = (message: string, description: string) => {
 	notification.open({
-		message: 'Zwischenablage',
-		description: `User ID ${uid} wurde kopiert!`
+		message,
+		description
 	})
 }
 
@@ -23,15 +24,17 @@ const Classifier = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
 	const { imgURL, isPrivate, id } = data
 
+	const { t } = useTranslation()
+
 
 	return (
 		<div className="grid grid-cols-1 gap-5 items-center justify-items-center">
-			<Tooltip title="Mit der ID können Sie zu einem späteren Zeitpunkt die Studie fortsetzen.">
-				<Text className="mt-10">User ID: <Text strong code>{user}</Text></Text>
+			<Tooltip title={t('tooltipText')}>
+				<Text className="mt-10">{`${t('uid')}:`} <Text strong code>{user}</Text></Text>
 			</Tooltip>
-			<CopyToClipboard text={user} onCopy={copyNotification}>
+			<CopyToClipboard text={user} onCopy={() => copyNotification(t('clipboardTitle'), t('clipboardDesc'))}>
 				<Button type="primary" shape="round" size="middle">
-					In die Zwischenablage
+					{t('clipboardInfo')}
 				</Button>
 			</CopyToClipboard>
 			<UserSubmissions uid={user} />
@@ -134,16 +137,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	}
 }
 
-export const User: FC = props => {
-	const { Header, Content, Footer } = Layout
-	return (
-		<>
-			<Header></Header>
-			<Content className="mx-auto" style={{ padding: 24, minHeight: 380, maxWidth: '80%', background: 'white' }}>
-				<Classifier {...props} />
-			</Content>
-			<Footer style={{ textAlign: 'center', height: '100%' }}>Written by Valerius Mattfeld, {(new Date().getFullYear())}.</Footer>
-		</>
-	)
-}
+const User: FC = props => (<div className="mx-auto" style={{ padding: 24, minHeight: 380, maxWidth: '80%', background: 'white' }}>
+	<Classifier {...props} />
+</div>)
 export default User

@@ -8,6 +8,7 @@ import Photo from "./Photo";
 
 import "antd/dist/antd.css"
 import { gql, useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography
 
@@ -27,6 +28,7 @@ const INSERT_ANSWER = gql`mutation InsertAnswer($object: results_insert_input!) 
 const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 	const router = useRouter()
 	const { user } = router.query
+	const { t } = useTranslation()
 	const [insertAnswer] = useMutation(INSERT_ANSWER)
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const questionOneOptions = ['sehr privat', 'privat', 'nicht privat', 'unentscheidbar']
@@ -78,7 +80,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 					{({ values: answers }) => (
 						<Form>
 							<Title level={5} id="questionOne">
-								Wie würden Sie die Empfindlichkeit des Bildes bewerten?
+								{t('questionOne')}
 							</Title>
 							<Radio.Group name="questionOne" >
 								{questionOneOptions.map(q => <div key={q}>
@@ -88,7 +90,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 								</div>)}
 							</Radio.Group>
 							<Title level={5} id="questionTwo" className="mt-5">
-								Mit wem würden Sie dieses Foto teilen?
+								{t('questionTwo')}
 							</Title>
 							<Checkbox.Group name="questionTwo">
 								{questionTwoOptions.map(q => <div key={q}>
@@ -98,7 +100,7 @@ const ImageForm: FC<ImageFormInterface> = ({ imgURL, isPrivate, imageID }) => {
 							</Checkbox.Group>
 							<br />
 							<div className="grid">
-								<SubmitButton className="align-middle  mt-5" size="large" loading={isSubmitting}>Weiter</SubmitButton>
+								<SubmitButton className="align-middle  mt-5" size="large" loading={isSubmitting}>{t('continue')}</SubmitButton>
 							</div>
 						</Form>
 					)}

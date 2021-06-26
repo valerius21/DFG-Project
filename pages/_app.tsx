@@ -2,8 +2,8 @@ import '../styles/globals.css'
 import { ApolloProvider } from '@apollo/client'
 import client from '../utils/apollo-client'
 import { motion } from 'framer-motion'
-import { Layout } from "antd";
 import '../i18n/i18n'
+import AppLayout from '../components/AppLayout'
 
 function MyApp({ Component, pageProps, router }) {
   return (
@@ -17,9 +17,9 @@ function MyApp({ Component, pageProps, router }) {
         }
       }}>
         <div style={{ background: '#f0f2f5', height: '100vh' }}>
-          <Layout>
+          <AppLayout>
             <Component {...pageProps} />
-          </Layout>
+          </AppLayout>
         </div>
       </motion.div>
     </ApolloProvider>

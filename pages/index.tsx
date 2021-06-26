@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 import { nanoid } from 'nanoid'
+import { useTranslation } from "react-i18next";
 import { UserOutlined } from '@ant-design/icons'
 import { Input, Button, Typography } from 'antd'
 
@@ -10,18 +11,19 @@ import { Input, Button, Typography } from 'antd'
 import { Config } from "../Config";
 import { useRouter } from "next/router";
 
-const { Title, Paragraph, Text } = Typography
+const { Title, Paragraph } = Typography
 
 const Start = () => {
   const [userID, setUserID] = useState(nanoid())
   const [loading, setLoading] = useState(false)
+  const { t } = useTranslation()
   const router = useRouter()
 
   return (
     <div>
       <div className={styles.page}>
         <br />
-        <Title className={styles.h1}>{Config.title.toUpperCase()}</Title>
+        <Title className={styles.h1}>{t('title')}</Title>
 
         <br />
         <div className={styles.logo}>
@@ -35,15 +37,14 @@ const Start = () => {
         <br />
 
         <Paragraph>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus expedita voluptate aliquid omnis itaque, aliquam rerum soluta asperiores aut, nostrum velit tempora nisi architecto necessitatibus, atque impedit veritatis fuga? Ullam.
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio illum, tempora illo, earum facilis aliquid minus at necessitatibus quaerat voluptatibus est totam. Labore aliquid impedit ea recusandae suscipit unde et?
+          {t('description')}
         </Paragraph>
 
         <br />
         <Input onChange={event => {
           event.preventDefault()
           setUserID(event.target.value)
-        }} size="large" placeholder="User ID (optional)" prefix={<UserOutlined />} />
+        }} size="large" placeholder={t('uid')} prefix={<UserOutlined />} />
         <br />
         <br />
         <Button onClick={() => {
@@ -53,7 +54,7 @@ const Start = () => {
           type="primary"
           size="large"
           loading={loading}
-        >Start</Button>
+        >{t('start')}</Button>
       </div>
       <footer className={styles.footer}>
       </footer>

@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 import router from 'next/router'
 import React, { FC, useEffect } from 'react'
 import { Progress } from "antd";
+import { useTranslation } from 'react-i18next';
 
 interface UserSubmissionsInterface {
 	uid: string | string[]
@@ -20,6 +21,7 @@ query UserSubmissionCount($_eq: String!) {
 // Number of sumbissions made by the user
 const UserSubmissions: FC<UserSubmissionsInterface> = ({ uid }) => {
 	const { loading, error, data, } = useQuery(USER_SUBMISSION_QUERY, { variables: { _eq: uid }, fetchPolicy: 'network-only', pollInterval: 4000 })
+	const { t } = useTranslation()
 
 	if (loading) return <div>Loading...</div>
 
@@ -34,7 +36,7 @@ const UserSubmissions: FC<UserSubmissionsInterface> = ({ uid }) => {
 
 	return (
 		<div style={{ width: '50%' }}>
-			<div className="text-center">Fortschritt</div>
+			<div className="text-center">{t('progress')}</div>
 			<Progress
 				strokeColor={{
 					from: '#830029',
