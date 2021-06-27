@@ -22,9 +22,9 @@ const AppLayout: FC = ({ children }) => {
 						}
 					/>
 				</div>
-				<div>
-					Written by Valerius Mattfeld, {(new Date().getFullYear())}.
-				</div>
+				{/* <div> */}
+				{/* Written by Valerius Mattfeld, {(new Date().getFullYear())}. */}
+				{/* </div> */}
 			</Footer>
 		</Layout>
 	)
