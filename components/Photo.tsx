@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
-// import NextImage from 'next/image'
 import { Skeleton, Space, Image as AImage, Spin } from "antd"
 
 interface PhotoInterface {
@@ -39,7 +38,7 @@ const Photo: FC<PhotoInterface> = ({ imgURL }) => {
 						className="self-auto"
 						alt="Please refresh the page"
 						src={imgURL}
-						width={300}
+						width="100%"
 						placeholder={
 							<Space size={12}>
 								<Skeleton.Button className="mb-10" style={{ width: 300, height: 500, background: 'white' }} active={true} />

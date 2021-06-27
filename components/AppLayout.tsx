@@ -6,7 +6,7 @@ const AppLayout: FC = ({ children }) => {
 	const { Content, Footer } = Layout
 	const { i18n } = useTranslation()
 	return (
-		<Layout>
+		<Layout className="max-w-screen-lg mx-auto">
 			<Content>
 				{children}
 			</Content>
